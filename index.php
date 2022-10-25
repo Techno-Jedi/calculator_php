@@ -1,4 +1,9 @@
 <?php
+ $connection_to_db = mysqli_connect("localhost:3306", "root", "", "my-calculator" );
+            if(!$connection_to_db) {
+            die ("Нет связи с бд: " . mysqli_connect_error());
+};
+
 if(isset($_REQUEST['submit'])){
 	$number1 = $_REQUEST['input-one'];
 	$number2 = $_REQUEST['input-two'];
@@ -30,6 +35,17 @@ if(isset($_REQUEST['submit'])){
 		}
 	}
 }
+    mysqli_query (
+    $connection_to_db, "INSERT INTO numbers (operand_1, operator, operand_2, result)
+                                         VALUES ( '" . $_REQUEST['input-one'] . "',
+                                                  '" . $_REQUEST['operation'] . "',
+                                                  '" . $_REQUEST['input-two'] . "',
+                                                  '" . $result . "')"
+                                                  );
+
+    $query = mysqli_query($connection_to_db, "SELECT * FROM `numbers`ORDER BY id DESC LIMIT 7");
+    $result = [];
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +61,7 @@ if(isset($_REQUEST['submit'])){
 	<div>
        <h2 class="calculator-content">Калькулятор</h2>
     </div>
-	<form method='post' class="calculate-form">
+	<form method='POST' class="calculate-form">
 		<input type="number" name="input-one" class="input-one" placeholder="0">
 		<select class="operations" name="operation">
 			<option value='sum'>+</option>
@@ -59,15 +75,23 @@ if(isset($_REQUEST['submit'])){
 
 		<div class="check">
             <p>Ваш результат:</p><?php
-            if(isset($result)) {
-                	echo "<div class='answer-text'>Ответ: $result</div>";
-                }
+
             if(!isset($error_result)) {
                     echo $error_result = '';
                 }
                 else {
-            	   echo "<div class='error-text'>Ошибка: $error_result</div>";
+            	   echo "<div class='error-text'>Ошибка: $error_result</div> <br />";
                 }
+
+            if(isset($result)) {
+                while($row = mysqli_fetch_assoc($query)){
+                    $result = $row;
+                     echo "<div class='answer-text'>id: " . $result['id'] . " </div> <br />";
+                     echo "<div class='answer-text'>Ответ: " . $result['result'] . " </div> <br />";
+                     echo "<div class='answer-text'>Оператор: " . $result['operator'] . " </div> <br />";
+                        }
+                }
+
             ?>
 
         </div>
