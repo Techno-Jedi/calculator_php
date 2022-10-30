@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+        function inputValue() {
+            let inputOne = document.querySelector(".input-one");
+            let numberOne = inputOne.value;
+            let inputTwo = document.querySelector(".input-two");
+            let numberTwo = inputTwo.value;
+            let operation = document.querySelector(".operation");
+            let operationsValue = operation.value;
+            fetch(`index.php?input-one=${numberOne}&input-two=${numberTwo}&operation=${operationsValue}`)
+                .then(response => response.text())
+                .then(textResult => {
+                    let result = document.querySelector(".check")
+                    result.innerHTML = " Ваш результат: " + textResult
+                })
+        }
+    </script>
+    <title>Calculator</title>
+</head>
+<body>
+<div class="calculator-box">
+    <div>
+        <h2 class="calculator-content">Калькулятор</h2>
+    </div>
+
+    <input type="number" name="input-one" class="input-one" placeholder="0">
+    <select class="operation" name="operation">
+        <option value='sum'>+</option>
+        <option value='subtract'>-</option>
+        <option value="multiply">*</option>
+        <option value="divide">/</option>
+    </select>
+    <input type="number" name="input-two" class="input-two" placeholder="0">
+
+    <button name="button"  class="button" onclick="inputValue();">Ответ</button>
+    <div class="check">
+    </div>
+</div>
+</body>
+</html>
