@@ -13,11 +13,11 @@ Database::connect();
                                       '" . $result . "')");
     }
     public function fetchResultFromBD() {
-
         $query = Database::query("SELECT * FROM `numbers`ORDER BY id DESC LIMIT 7");
-        $result = [];
-        while ($result =Database::fetch($query)) {
-          $result;
+          if($query){
+           while($result =Database::fetch($query)){
+            echo $result["result"] . "<br />";
+            }
         }
     }
 };
