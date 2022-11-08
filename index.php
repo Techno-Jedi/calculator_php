@@ -1,12 +1,13 @@
 <?php
 require_once("classes/Database.php");
-require_once("classes/CalculatorAndDb.php");
+require_once("classes/databaseOperations.php");
 $number1 = $_REQUEST['input-one'];
 $number2 = $_REQUEST['input-two'];
 $operation = $_REQUEST['operation'];
- function errorResult($operation, $number1, $number2){
+$error_result = "";
+
  if (!$operation || (!$number1 && $number1 != '0') || (!$number2 && $number2 != '0')) {
-    $result = 'Не все поля заполнены' . "<br />";
+   return print_r($error_result = 'Не все поля заполнены' . "<br />");
  } else {
      switch ($operation) {
          case 'sum':
@@ -20,7 +21,7 @@ $operation = $_REQUEST['operation'];
              break;
          case 'divide':
              if ($number2 !== '0') {
-                 $result = $number1 / $number2;
+                 echo $error_result = $number1 / $number2;
                  break;
              } else {
                $result = "На ноль делить нельзя!";
@@ -28,11 +29,9 @@ $operation = $_REQUEST['operation'];
          };
      }
  }
-        return $result;
-    }
-$res = errorResult($operation, $number1, $number2);
-$instanceOfTheCalculatorClass = new CalculatorAndDb();
-$instanceOfTheCalculatorClass -> saveResultBd($number1, $number2, $operation, $res);
+
+$instanceOfTheCalculatorClass = new databaseOperations();
+$instanceOfTheCalculatorClass -> saveResultBd($number1, $number2, $operation, $result);
 $fetchResult = $instanceOfTheCalculatorClass -> fetchResultFromBD();
-print_r($res);
+print_r($result);
 ?>
