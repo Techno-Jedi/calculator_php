@@ -1,6 +1,6 @@
 <?php
 require_once("classes/Database.php");
-class databaseOperations {
+class DatabaseOperations {
 public function __construct() {
 Database::connect();
 }
