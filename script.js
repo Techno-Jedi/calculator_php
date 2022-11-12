@@ -9,6 +9,6 @@ function inputValue() {
         .then(response => response.text())
         .then(textResult => {
             let result = document.querySelector(".check")
-            result.innerHTML = " Ваш результат: " + textResult
+            result.innerHTML = "Ваш результат перейдите по ссылке: " + textResult
         })
 }

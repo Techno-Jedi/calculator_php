@@ -29,5 +29,5 @@ $operation = $_REQUEST['operation'];
      };
 $instanceOfTheCalculatorClass = new DatabaseOperations();
 $instanceOfTheCalculatorClass -> saveResultBd($number1, $number2, $operation, $result);
-$fetchResult = $instanceOfTheCalculatorClass -> fetchResultFromBD();
+// $fetchResult = $instanceOfTheCalculatorClass -> fetchResultFromBD();
 ?>
