@@ -15,7 +15,7 @@ Database::connect();
         $query = Database::query("SELECT * FROM `numbers`ORDER BY id DESC LIMIT 7");
           if($query){
            while($result =Database::fetch($query)){
-           echo $result["result"] . "<br />";
+           return $result["result"] . "<br />";
             }
         }
     }

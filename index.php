@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("classes/Database.php");
 require_once("classes/DatabaseOperations.php");
 $number1 = $_REQUEST['input-one'];
@@ -29,5 +30,4 @@ $operation = $_REQUEST['operation'];
      };
 $instanceOfTheCalculatorClass = new DatabaseOperations();
 $instanceOfTheCalculatorClass -> saveResultBd($number1, $number2, $operation, $result);
-// $fetchResult = $instanceOfTheCalculatorClass -> fetchResultFromBD();
 ?>
