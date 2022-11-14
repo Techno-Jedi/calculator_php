@@ -75,11 +75,8 @@ if(isset($_REQUEST['submit'])){
                 	echo "<div class='answer-text'>Опрератор:  $operation </div>";
                 	echo "<div class='answer-text'>Результат: $exp </div>";
                 }
-            if(!isset($error_result)) {
-                    echo $error_result = '';
-                }
-                else {
-            	   echo "<div class='error-text'>Ошибка: $error_result</div>";
+            if(isset($error_result)) {
+                   echo "<div class='error-text'>Ошибка: $error_result</div>";
                 }
             ?>
         </div>
